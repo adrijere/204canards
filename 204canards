@@ -45,3 +45,5 @@ try:
     plt.show()
 except:
     print ("Can not display.")
+
+print("toto")
