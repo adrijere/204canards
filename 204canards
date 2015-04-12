@@ -1,0 +1,47 @@
+#!/usr/bin/python2
+
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+import math
+
+x = [ ]
+y = [ ]
+tmp = [ ]
+a = 0
+temps = float(0)
+prob = float(0)
+result = float(1)
+
+if (len(sys.argv) != 2):
+    sys.exit("Nombre d'arguments invalides.\n Usage : ./204canards <a> avec a compris entre 0 et 2,5.")
+a = sys.argv[1]
+if (a < 0 and a > 2.5):
+    sys.exit("Le premier argument doit etre compris entre 0 et 2,5.")
+
+try:
+    a = float(a)
+except:
+    print ("Le premier argument (a) doit etre un nombre.")
+
+try:
+    while (temps < 10) :
+        prob = (a * np.exp(-temps)) + ((4 - (3 * a)) * np.exp(-2 * temps)) + (((2 * a) - 4) * np.exp(-4 * temps))
+        result = (result + prob)
+        tmp.append(result / 1000)
+        x.append(temps)
+        y.append(prob)
+        prob = float(0)
+        temps = temps + 0.001
+except:
+    sys.exit("Nombre(s) trop grand(s).")
+
+try:
+    plt.plot(x,y, 'r')
+    plt.plot(x, tmp, 'b')
+    plt.title("204canards", fontsize = 20)
+    plt.xlabel("temps (minutes)", fontsize = 16)
+    plt.ylabel("probabilite", fontsize = 16)
+    plt.show()
+except:
+    print ("Can not display.")
